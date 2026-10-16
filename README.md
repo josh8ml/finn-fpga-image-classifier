@@ -1,19 +1,19 @@
 # FPGA-Accelerated Quantized Image Classifier Using FINN
 
-> 🚧 **Work in progress.** This repository documents my work with [FINN](https://github.com/Xilinx/finn), AMD Research's open-source compiler that turns quantized neural networks into FPGA dataflow accelerators. The goal: train a small quantized image classifier, compare it with a CPU baseline, and generate, simulate and synthesize a FINN hardware implementation.
+> **Work in progress.** This repository documents my work with [FINN](https://github.com/Xilinx/finn), AMD Research's open-source compiler that turns quantized neural networks into FPGA dataflow accelerators. The goal: train a small quantized image classifier, compare it with a CPU baseline, and generate, simulate and synthesize a FINN hardware implementation.
 
 ## Status
 
 | Stage | Status |
 |---|---|
-| FINN environment on Windows (WSL2 + Docker) | ✅ Done: FINN's software test suite passes |
-| FINN tutorials (ONNX basics, Brevitas → QONNX → FINN import) | ✅ Done |
-| FINN end-to-end tutorial built to a bitstream for the AUP-ZU3 (no board) | ✅ Done: timing met at 100 MHz |
-| Vivado/Vitis 2024.2 connected to FINN (Vitis HLS + RTL simulation verified) | ✅ Done |
-| Own project: quantized image classifier + CPU baseline | ⬜ Planned |
-| FINN estimate / RTL simulation / synthesis results | ⬜ Planned |
-| On-board measurements | ⬜ Needs an FPGA board (AUP-ZU3 or Kria KV260) |
-| Upstream contribution to FINN | ⬜ Investigating |
+| FINN environment on Windows (WSL2 + Docker) | Done: FINN's software test suite passes |
+| FINN tutorials (ONNX basics, Brevitas → QONNX → FINN import) | Done |
+| Vivado/Vitis 2024.2 connected to FINN (Vitis HLS + RTL simulation verified) | Done |
+| FINN end-to-end tutorial built to a bitstream for the AUP-ZU3 (no board) | Done: timing met at 100 MHz |
+| Own project: quantized image classifier + CPU baseline | Planned |
+| FINN estimate / RTL simulation / synthesis results for own project | Planned |
+| On-board measurements | Needs an FPGA board (AUP-ZU3 or Kria KV260) |
+| Upstream contribution to FINN | In progress |
 
 ## Verified results so far
 
