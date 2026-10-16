@@ -155,10 +155,9 @@ cd ~ && git clone https://github.com/Xilinx/finn.git && cd finn
 | `basics/1_brevitas_network_import_via_QONNX` | Pretrained quantized MNIST MLP: Brevitas vs. QONNX vs. FINN-ONNX outputs equal (`True`, `True`) | Software |
 | `test_fpgadataflow_fmpadding` cppsim + rtlsim (`xczu3eg`, RTL layer) | 2 passed (2.2 s); rtlsim cycles within 10 of FINN's estimate | Simulation (Vivado XSI) |
 | `test_fpgadataflow_checksum` (`xczu3eg`, `MVAU_hls` + `CheckSum_hls`) | 1 passed (69.9 s): Vitis HLS synthesis + cppsim + rtlsim | HLS + simulation |
-| FPGA resources / Fmax / power | **NOT RUN** | — |
+| `tfc_end2end_example` → AUP-ZU3 bitstream | Timing met at 100 MHz (WNS +3.812 ns); accelerator 8,246 LUTs / 10,853 FFs / 11 BRAM36 / 0 DSP; total on-chip power 2.869 W (estimate). See `results-tfc-end2end.md` | Vivado post-route reports |
 | On-board throughput | **NOT RUN** (no board) | — |
 
 ## 11. Next steps
 
-- Work through `end2end_example/bnn-pynq/tfc_end2end_example.ipynb`. It's the same MNIST network as notebook 1, taken all the way to hardware.
 - Phase 4: own image-classifier project (software baseline vs. FINN estimate/sim/synthesis).
