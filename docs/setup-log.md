@@ -17,7 +17,7 @@ Only results that actually ran are marked PASSED.
 | Memory / disk | 15 GB available to WSL; ~1.4 TB free |
 | Docker | Docker Engine (installed in WSL via `get.docker.com`), runs without sudo |
 | FINN | `main` @ `38c42bf`, tag `v1.0.0-alpha` |
-| Vivado / Vitis | 2024.2, install in progress (not used for any result below) |
+| Vivado / Vitis / Vitis HLS | 2024.2 in `/tools/Xilinx` (device families: Zynq UltraScale+ MPSoC, Kria SOMs, Zynq-7000, Artix-7) |
 
 ### Commands
 
@@ -36,6 +36,17 @@ cd ~ && git clone https://github.com/Xilinx/finn.git && cd finn
 ./run-docker.sh quicktest
 ./run-docker.sh notebook
 ```
+```bash
+# Vivado/Vitis 2024.2: installer run in a temporary ubuntu:22.04 container (details in windows-wsl-setup.md)
+echo 'export FINN_XILINX_PATH=/tools/Xilinx' >> ~/.bashrc
+echo 'export FINN_XILINX_VERSION=2024.2' >> ~/.bashrc
+source ~/.bashrc
+cd ~/finn && ./run-docker.sh                 # FINN shell with Vivado mounted
+echo $XILINX_VIVADO                          # -> /tools/Xilinx/Vivado/2024.2
+pytest -v "tests/fpgadataflow/test_fpgadataflow_fmpadding.py::test_fpgadataflow_fmpadding[cppsim-idt0-1-2-pad0-idim0]" \
+          "tests/fpgadataflow/test_fpgadataflow_fmpadding.py::test_fpgadataflow_fmpadding[rtlsim-idt0-1-2-pad0-idim0]"
+pytest -v tests/fpgadataflow/test_fpgadataflow_checksum.py::test_fpgadataflow_checksum
+```
 
 ### Results
 
@@ -45,7 +56,11 @@ cd ~ && git clone https://github.com/Xilinx/finn.git && cd finn
 | `./run-docker.sh quicktest` (FINN's non-Vivado test suite) | PASSED: **2736 passed, 16 skipped, 5 xfailed, 1 xpassed, 1449 warnings in 72 s** |
 | Notebook `basics/0_how_to_work_with_onnx` | Ran in Jupyter, no errors |
 | Notebook `basics/1_brevitas_network_import_via_QONNX` | First attempt failed at cell 8 (see problems). Run on its own: PASSED; Brevitas vs. QONNX vs. FINN-ONNX outputs match (`np.isclose(...).all()` → `True`, `True`) |
-| Vivado-dependent steps (HLS, cppsim, rtlsim, synthesis) | NOT RUN yet |
+| Vivado 2024.2 install | DONE: `/tools/Xilinx/{Vivado,Vitis,Vitis_HLS}/2024.2` present |
+| `test_fpgadataflow_fmpadding` (cppsim + rtlsim, part `xczu3eg`) | PASSED, 2/2 in 2.2 s. The layer is specialized to **RTL** (`FMPadding_rtl`), so this exercises Vivado's simulator (XSI) but **not** Vitis HLS; rtlsim cycle count matched FINN's estimate (test asserts within 10 cycles) |
+| `test_fpgadataflow_checksum` (part `xczu3eg`, `MVAU_hls` + `CheckSum_hls`) | PASSED in 69.9 s: **Vitis HLS synthesis + cppsim + rtlsim work** |
+| `./run-docker.sh quicktest verify` | NOT RUN: its test targets a Versal part (`xcvc1902`), which wasn't installed |
+| Full bitstream / out-of-context synthesis | NOT RUN yet |
 
 ### Problems and fixes
 
@@ -56,6 +71,9 @@ cd ~ && git clone https://github.com/Xilinx/finn.git && cd finn
 | Linux commands typed into PowerShell | Two different shells | `wsl` then `cd ~`; Linux prompt ends in `$` |
 | `df -h ~` reported 954 GB free | That's the max size of WSL's virtual disk | Real free space: `df -h /mnt/c` |
 | Notebook 1, cell 8: `OSError: [Errno 98] Address already in use` | Notebook 0's kernel still held Netron's port 8081. `showInNetron()` retries after `netron.stop()`, but that only stops servers in its own process | Shut down notebook 0's kernel (or restart the Jupyter server), rerun notebook 1 |
+| Vivado installer on Ubuntu 26.04 | Newer than the installer supports | Ran the installer inside a temporary `ubuntu:22.04` container, installing to a mounted `/tools/Xilinx` |
+| `quicktest verify` unsuitable | Its HLS LayerNorm test uses Versal part `xcvc1902`; only Zynq/Kria/Artix families installed | Verified with FINN tests that target `xczu3eg` instead (above) |
+| `pytest -k "... idim0 and simd0 ..."` → `32339 deselected` | Guessed parametrize IDs wrong (actual: `[rtlsim-idt0-1-2-pad0-idim0]`) | `pytest --collect-only -q <file>` to list exact IDs |
 
 ### Notes
 
@@ -95,6 +113,7 @@ Versions: torch 2.8.0 (PyPI build, since the cu126 index was blocked), brevitas 
 
 ## Upstream observations (possible contributions, to be checked against open issues)
 
-1. `setup-local.sh` and `run-docker.sh` still suggest `FINN_XILINX_VERSION=2022.2` in help/warning text, while `docs/finn/getting_started.rst` requires 2024.2. Confirmed on `dev` @ `e9dd2eb` (2026-10-05).
+1. `setup-local.sh` and `run-docker.sh` still suggest `FINN_XILINX_VERSION=2022.2` in help/warning text (and `docker/finn_entrypoint.sh` says "Our recommendation is to use version 2022.2" for Vitis HLS), while `docs/finn/getting_started.rst` requires 2024.2. Confirmed on `dev` @ `e9dd2eb` (2026-10-05) for the first two.
 2. The basics notebooks can't be run one after another in the same Jupyter session: notebook 1's first `showInNetron()` fails with `Address already in use` while notebook 0's kernel is alive. Reproduced on the WSL setup.
 3. `README.md` says only Docker-based execution is supported, while `getting_started.rst` documents a local install.
+4. `getting_started.rst` tells users to verify the install with `./run-docker.sh quicktest verify`, but that check builds for a Versal part (`xcvc1902`); users who install only Zynq/Kria device families (a common way to save disk) can't use it, and this isn't mentioned.

@@ -15,7 +15,7 @@ Working notes for my FINN project: environment, setup, how FINN works, and what 
 | Container runtime | Docker Engine (inside WSL), runs without `sudo` |
 | FINN | `Xilinx/finn` `main` @ `38c42bf`, tag `v1.0.0-alpha` (2026-09-06) |
 | FINN container | Ubuntu 22.04 + Python 3.10 + PyTorch 2.8 + Brevitas + QONNX (built by `run-docker.sh`) |
-| Vivado / Vitis | 2024.2 — **being installed** (not used for any result below) |
+| Vivado / Vitis / Vitis HLS | 2024.2 in `/tools/Xilinx` (Zynq UltraScale+, Kria, Zynq-7000, Artix-7 device families) |
 | FPGA board | none yet (target: AUP-ZU3 or Kria KV260) |
 
 ## 2. Setup steps (summary)
@@ -25,6 +25,7 @@ Working notes for my FINN project: environment, setup, how FINN works, and what 
 3. Installed Docker Engine in Ubuntu (`get.docker.com`), added my user to the `docker` group.
 4. Cloned FINN and ran the official non-Vivado test suite in Docker (`./run-docker.sh quicktest`).
 5. Ran the two "basics" tutorial notebooks (`./run-docker.sh notebook`).
+6. Installed Vivado/Vitis 2024.2 (installer run in a temporary Ubuntu 22.04 container), pointed FINN at it with `FINN_XILINX_PATH` / `FINN_XILINX_VERSION`, and verified RTL simulation and Vitis HLS with FINN's own tests.
 
 Full command-by-command log with versions and errors: `setup-log.md`.
 
@@ -139,6 +140,7 @@ cd ~ && git clone https://github.com/Xilinx/finn.git && cd finn
 
 | Problem | Cause | Solution |
 |---|---|---|
+| `quicktest verify` can't be used | Its test targets a Versal part that wasn't installed | Verified with `xczu3eg`-targeted FINN tests (fmpadding, checksum) |
 | `wsl --install -d Ubuntu-22.04` → "invalid distribution name" | Name not in WSL's online list | `wsl --update`, then `wsl --install -d Ubuntu` |
 | Ran Linux commands in PowerShell | Two different shells | `wsl` → `cd ~`; Linux prompt ends in `$` |
 | `df -h ~` showed 954 GB free | That's WSL's virtual-disk max size | Real free space: `df -h /mnt/c` |
@@ -151,12 +153,12 @@ cd ~ && git clone https://github.com/Xilinx/finn.git && cd finn
 | `./run-docker.sh quicktest` | **2736 passed, 16 skipped, 5 xfailed, 1 xpassed** (72 s) | Software tests |
 | `basics/0_how_to_work_with_onnx` | Ran (built a small ONNX graph of Add nodes, replaced two consecutive Adds with one Sum node; output matches the NumPy reference before and after) | Software |
 | `basics/1_brevitas_network_import_via_QONNX` | Pretrained quantized MNIST MLP: Brevitas vs. QONNX vs. FINN-ONNX outputs equal (`True`, `True`) | Software |
-| HLS synthesis, cppsim, rtlsim | **NOT RUN** (Vivado being installed) | — |
+| `test_fpgadataflow_fmpadding` cppsim + rtlsim (`xczu3eg`, RTL layer) | 2 passed (2.2 s); rtlsim cycles within 10 of FINN's estimate | Simulation (Vivado XSI) |
+| `test_fpgadataflow_checksum` (`xczu3eg`, `MVAU_hls` + `CheckSum_hls`) | 1 passed (69.9 s): Vitis HLS synthesis + cppsim + rtlsim | HLS + simulation |
 | FPGA resources / Fmax / power | **NOT RUN** | — |
 | On-board throughput | **NOT RUN** (no board) | — |
 
 ## 11. Next steps
 
-- Finish the Vivado 2024.2 install, then run `./run-docker.sh quicktest verify` (cppsim + rtlsim check).
 - Work through `end2end_example/bnn-pynq/tfc_end2end_example.ipynb`. It's the same MNIST network as notebook 1, taken all the way to hardware.
 - Phase 4: own image-classifier project (software baseline vs. FINN estimate/sim/synthesis).

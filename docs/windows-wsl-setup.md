@@ -45,7 +45,7 @@ Red warnings about `FINN_XILINX_PATH` / `PLATFORM_REPO_PATHS` / `SLASHKIT_DEB_PA
 
 **Notebook tip:** run one notebook at a time. Shut down the previous notebook's kernel (File → Close and Shut Down Notebook) before starting the next, or the Netron viewer fails with `Address already in use`.
 
-## 5. Vivado/Vitis 2024.2 (in progress)
+## 5. Vivado/Vitis 2024.2
 
 FINN requires exactly 2024.2. Because my WSL Ubuntu (26.04) is newer than what the installer supports, the installer runs inside a temporary Ubuntu 22.04 container and installs into `/tools/Xilinx` on the WSL filesystem.
 
@@ -80,12 +80,23 @@ cd /installer/extracted
 ./xsetup --agree XilinxEULA,3rdPartyEULA --batch Install --config /root/.Xilinx/install_config.txt
 ```
 
-6. Point FINN at it and run FINN's Vivado check *(not yet done)*:
+6. Point FINN at it (permanently) and open a FINN shell:
 
 ```bash
-export FINN_XILINX_PATH=/tools/Xilinx
-export FINN_XILINX_VERSION=2024.2
-./run-docker.sh quicktest verify
+echo 'export FINN_XILINX_PATH=/tools/Xilinx' >> ~/.bashrc
+echo 'export FINN_XILINX_VERSION=2024.2' >> ~/.bashrc
+source ~/.bashrc
+cd ~/finn && ./run-docker.sh
+echo $XILINX_VIVADO     # should print /tools/Xilinx/Vivado/2024.2
+```
+
+7. Verify. FINN's own `./run-docker.sh quicktest verify` builds for a **Versal** part, which isn't installed with the device selection above. Instead, run FINN tests that target the AUP-ZU3 part (`xczu3eg`):
+
+```bash
+# Vivado simulator via an RTL layer (seconds)
+pytest -v "tests/fpgadataflow/test_fpgadataflow_fmpadding.py::test_fpgadataflow_fmpadding[rtlsim-idt0-1-2-pad0-idim0]"
+# Vitis HLS synthesis + cppsim + rtlsim (about a minute)
+pytest -v tests/fpgadataflow/test_fpgadataflow_checksum.py::test_fpgadataflow_checksum
 ```
 
 ## Troubleshooting

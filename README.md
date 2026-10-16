@@ -8,7 +8,7 @@
 |---|---|
 | FINN environment on Windows (WSL2 + Docker) | ✅ Done: FINN's software test suite passes |
 | FINN tutorials (ONNX basics, Brevitas → QONNX → FINN import) | ✅ Done |
-| Vivado/Vitis 2024.2 + FINN's Vivado verification | ⏳ In progress |
+| Vivado/Vitis 2024.2 connected to FINN (Vitis HLS + RTL simulation verified) | ✅ Done |
 | Own project: quantized image classifier + CPU baseline | ⬜ Planned |
 | FINN estimate / RTL simulation / synthesis results | ⬜ Planned |
 | On-board measurements | ⬜ Needs an FPGA board (AUP-ZU3 or Kria KV260) |
@@ -23,6 +23,8 @@ All results below were actually run. Nothing here comes from FPGA hardware yet.
 | FINN `v1.0.0-alpha` (`38c42bf`) non-Vivado test suite (`./run-docker.sh quicktest`) | 2736 passed, 16 skipped, 5 xfailed, 1 xpassed | Software tests |
 | `basics/0_how_to_work_with_onnx` | Graph transformation output matches NumPy reference | Software |
 | `basics/1_brevitas_network_import_via_QONNX` | Quantized MNIST MLP gives identical outputs in Brevitas (PyTorch), QONNX and FINN-ONNX | Software |
+| FINN `test_fpgadataflow_fmpadding` (rtlsim, AUP-ZU3 part `xczu3eg`) | Passed; simulated cycle count within 10 cycles of FINN's analytical estimate | RTL simulation |
+| FINN `test_fpgadataflow_checksum` (AUP-ZU3 part `xczu3eg`) | Passed: HLS layers synthesized with Vitis HLS 2024.2, verified in C++ and RTL simulation | HLS + RTL simulation |
 
 **Results policy:** every number in this repo is labelled as *measured (software)*, *estimate* (FINN analytical model), *simulation* (RTL sim), *synthesis report* (Vivado), or *measured (hardware)*. No FPGA resource, timing, throughput or power figures are claimed without the corresponding run.
 
@@ -34,7 +36,7 @@ All results below were actually run. Nothing here comes from FPGA hardware yet.
 
 ## Tools
 
-FINN `v1.0.0-alpha` · Brevitas · QONNX/ONNX · PyTorch · Docker · WSL2 (Ubuntu) · Vivado/Vitis 2024.2 (in progress)
+FINN `v1.0.0-alpha` · Brevitas · QONNX/ONNX · PyTorch · Docker · WSL2 (Ubuntu) · Vivado / Vitis HLS 2024.2
 
 ## Acknowledgements
 
