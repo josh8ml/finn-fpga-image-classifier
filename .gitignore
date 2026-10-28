@@ -19,3 +19,6 @@ vivado*.jou
 .DS_Store
 Thumbs.db
 .vscode/
+
+# Training runs and FINN build outputs (large); small results are copied to results/
+runs/
