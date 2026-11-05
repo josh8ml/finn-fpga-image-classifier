@@ -1,0 +1,7 @@
+{
+  "images": 100,
+  "max_abs_logit_diff": 0.0,
+  "top1_agreement": 1.0,
+  "allclose_atol_1e-4": true,
+  "result_type": "measured (software)"
+}

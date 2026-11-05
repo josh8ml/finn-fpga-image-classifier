@@ -1,0 +1,67 @@
+{
+  "model": "fp32",
+  "test_accuracy": 0.9127,
+  "test_images": 10000,
+  "train_images": 60000,
+  "epochs": 10,
+  "batch_size": 128,
+  "lr": 0.001,
+  "seed": 0,
+  "parameters": 50010,
+  "train_time_s": 49.8,
+  "history": [
+    {
+      "epoch": 1,
+      "train_loss": 0.47544815728664397,
+      "test_acc": 0.8686
+    },
+    {
+      "epoch": 2,
+      "train_loss": 0.30443062477111815,
+      "test_acc": 0.8764
+    },
+    {
+      "epoch": 3,
+      "train_loss": 0.2589222049077352,
+      "test_acc": 0.8935
+    },
+    {
+      "epoch": 4,
+      "train_loss": 0.22681029629707336,
+      "test_acc": 0.9016
+    },
+    {
+      "epoch": 5,
+      "train_loss": 0.20056949795087178,
+      "test_acc": 0.9014
+    },
+    {
+      "epoch": 6,
+      "train_loss": 0.17644362647533418,
+      "test_acc": 0.906
+    },
+    {
+      "epoch": 7,
+      "train_loss": 0.15431159158150354,
+      "test_acc": 0.9109
+    },
+    {
+      "epoch": 8,
+      "train_loss": 0.13661100497245787,
+      "test_acc": 0.911
+    },
+    {
+      "epoch": 9,
+      "train_loss": 0.12277163848876953,
+      "test_acc": 0.9111
+    },
+    {
+      "epoch": 10,
+      "train_loss": 0.11667570462226867,
+      "test_acc": 0.9127
+    }
+  ],
+  "torch": "2.8.0+cu126",
+  "python": "3.10.12",
+  "result_type": "measured (software)"
+}

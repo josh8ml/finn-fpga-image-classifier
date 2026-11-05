@@ -1,0 +1,86 @@
+{
+  "StreamingFIFO_rtl_0": {},
+  "Thresholding_rtl_0": {},
+  "StreamingFIFO_rtl_1": {},
+  "ConvolutionInputGenerator_rtl_0": {},
+  "StreamingFIFO_rtl_2": {},
+  "StreamingDataWidthConverter_rtl_0": {},
+  "StreamingFIFO_rtl_3": {},
+  "MVAU_hls_0": {
+    "op_mac_4bx8b": 97344,
+    "param_weight_4b": 144,
+    "param_threshold_14b": 16
+  },
+  "StreamingFIFO_rtl_4": {},
+  "StreamingDataWidthConverter_rtl_1": {},
+  "StreamingFIFO_rtl_5": {},
+  "ConvolutionInputGenerator_rtl_1": {},
+  "StreamingFIFO_rtl_6": {},
+  "StreamingDataWidthConverter_hls_0": {},
+  "StreamingFIFO_rtl_7": {},
+  "MVAU_hls_1": {
+    "op_mac_4bx4b": 1327104,
+    "param_weight_4b": 2304,
+    "param_threshold_13b": 16
+  },
+  "StreamingFIFO_rtl_8": {},
+  "StreamingDataWidthConverter_rtl_2": {},
+  "StreamingFIFO_rtl_9": {},
+  "ConvolutionInputGenerator_rtl_2": {},
+  "StreamingFIFO_rtl_10": {},
+  "Pool_hls_0": {},
+  "StreamingFIFO_rtl_11": {},
+  "StreamingDataWidthConverter_rtl_3": {},
+  "StreamingFIFO_rtl_12": {},
+  "ConvolutionInputGenerator_rtl_3": {},
+  "StreamingFIFO_rtl_13": {},
+  "StreamingDataWidthConverter_rtl_4": {},
+  "StreamingFIFO_rtl_14": {},
+  "MVAU_hls_2": {
+    "op_mac_4bx4b": 460800,
+    "param_weight_4b": 4608,
+    "param_threshold_13b": 32
+  },
+  "StreamingFIFO_rtl_15": {},
+  "StreamingDataWidthConverter_rtl_5": {},
+  "StreamingFIFO_rtl_16": {},
+  "ConvolutionInputGenerator_rtl_4": {},
+  "StreamingFIFO_rtl_17": {},
+  "StreamingDataWidthConverter_rtl_6": {},
+  "StreamingFIFO_rtl_18": {},
+  "MVAU_hls_3": {
+    "op_mac_4bx4b": 589824,
+    "param_weight_4b": 9216,
+    "param_threshold_14b": 32
+  },
+  "StreamingFIFO_rtl_19": {},
+  "StreamingDataWidthConverter_rtl_7": {},
+  "StreamingFIFO_rtl_20": {},
+  "ConvolutionInputGenerator_rtl_5": {},
+  "StreamingFIFO_rtl_21": {},
+  "Pool_hls_1": {},
+  "StreamingFIFO_rtl_22": {},
+  "StreamingDataWidthConverter_rtl_8": {},
+  "StreamingFIFO_rtl_23": {},
+  "MVAU_hls_4": {
+    "op_mac_4bx4b": 32768,
+    "param_weight_4b": 32768,
+    "param_threshold_15b": 64
+  },
+  "StreamingFIFO_rtl_24": {},
+  "MVAU_rtl_0": {
+    "op_mac_4bx4b": 640,
+    "param_weight_4b": 640
+  },
+  "StreamingFIFO_rtl_25": {},
+  "LabelSelect_hls_0": {},
+  "StreamingFIFO_rtl_26": {},
+  "total": {
+    "op_mac_4bx8b": 97344.0,
+    "param_weight_4b": 49680.0,
+    "param_threshold_14b": 48.0,
+    "op_mac_4bx4b": 2411136.0,
+    "param_threshold_13b": 48.0,
+    "param_threshold_15b": 64.0
+  }
+}

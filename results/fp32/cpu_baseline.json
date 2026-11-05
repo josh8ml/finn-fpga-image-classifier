@@ -1,0 +1,13 @@
+{
+  "result_type": "measured (software)",
+  "model": "fp32",
+  "cpu": "13th Gen Intel(R) Core(TM) i7-13700K",
+  "torch_threads": 12,
+  "torch": "2.8.0+cu126",
+  "batch1_latency_us_median": 177.9,
+  "batch1_latency_us_p99": 239.6,
+  "batch1_throughput_img_per_s": 5621.1,
+  "batch256_throughput_img_per_s": 32885.4,
+  "test_accuracy": 0.9127,
+  "test_images": 10000
+}
