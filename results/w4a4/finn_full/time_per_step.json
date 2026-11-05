@@ -1,0 +1,8 @@
+{
+  "phase_prepare_model": 0.49050116539001465,
+  "phase_optimize_model": 1.0545694828033447,
+  "phase_convert_to_hardware": 0.03593325614929199,
+  "phase_optimize_hardware": 195.1537389755249,
+  "phase_build_hardware": 0.06366848945617676,
+  "phase_generate_outputs": 622.6807510852814
+}

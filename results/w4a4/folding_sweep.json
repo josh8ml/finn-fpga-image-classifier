@@ -1,0 +1,74 @@
+{
+  "result_type": "estimate (FINN analytical model)",
+  "model": "w4a4",
+  "part": "xczu3eg-sfvc784-2-e (AUP-ZU3)",
+  "clock_mhz": 100,
+  "rows": [
+    {
+      "target_fps": 1000,
+      "estimated_throughput_fps": 1017.3,
+      "bottleneck_layer": "MVAU_hls_3",
+      "bottleneck_cycles": 98304,
+      "estimated_latency_us": 5401.2,
+      "LUT": 5107,
+      "BRAM_18K": 18,
+      "URAM": 0,
+      "DSP": 1
+    },
+    {
+      "target_fps": 2000,
+      "estimated_throughput_fps": 2034.5,
+      "bottleneck_layer": "MVAU_hls_3",
+      "bottleneck_cycles": 49152,
+      "estimated_latency_us": 2996.8,
+      "LUT": 6653,
+      "BRAM_18K": 19,
+      "URAM": 0,
+      "DSP": 1
+    },
+    {
+      "target_fps": 5000,
+      "estimated_throughput_fps": 5208.3,
+      "bottleneck_layer": "MVAU_hls_2",
+      "bottleneck_cycles": 19200,
+      "estimated_latency_us": 1598.3,
+      "LUT": 10279,
+      "BRAM_18K": 25,
+      "URAM": 0,
+      "DSP": 1
+    },
+    {
+      "target_fps": 10000,
+      "estimated_throughput_fps": 8212.9,
+      "bottleneck_layer": "ConvolutionInputGenerator_rtl_2",
+      "bottleneck_cycles": 12176,
+      "estimated_latency_us": 1044.3,
+      "LUT": 17283,
+      "BRAM_18K": 42,
+      "URAM": 0,
+      "DSP": 1
+    },
+    {
+      "target_fps": 20000,
+      "estimated_throughput_fps": 16622.3,
+      "bottleneck_layer": "ConvolutionInputGenerator_rtl_2",
+      "bottleneck_cycles": 6016,
+      "estimated_latency_us": 531.6,
+      "LUT": 30851,
+      "BRAM_18K": 75,
+      "URAM": 0,
+      "DSP": 1
+    },
+    {
+      "target_fps": 50000,
+      "estimated_throughput_fps": 21701.4,
+      "bottleneck_layer": "MVAU_hls_1",
+      "bottleneck_cycles": 4608,
+      "estimated_latency_us": 381.1,
+      "LUT": 32059,
+      "BRAM_18K": 77,
+      "URAM": 0,
+      "DSP": 1
+    }
+  ]
+}

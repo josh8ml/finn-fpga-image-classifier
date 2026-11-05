@@ -1,0 +1,67 @@
+{
+  "model": "w2a2",
+  "test_accuracy": 0.8848,
+  "test_images": 10000,
+  "train_images": 60000,
+  "epochs": 10,
+  "batch_size": 128,
+  "lr": 0.005,
+  "seed": 0,
+  "parameters": 50002,
+  "train_time_s": 92.3,
+  "history": [
+    {
+      "epoch": 1,
+      "train_loss": 0.7320087891101837,
+      "test_acc": 0.7983
+    },
+    {
+      "epoch": 2,
+      "train_loss": 0.4677554618676503,
+      "test_acc": 0.8316
+    },
+    {
+      "epoch": 3,
+      "train_loss": 0.4162556657632192,
+      "test_acc": 0.8493
+    },
+    {
+      "epoch": 4,
+      "train_loss": 0.3844880566120148,
+      "test_acc": 0.8502
+    },
+    {
+      "epoch": 5,
+      "train_loss": 0.362573889875412,
+      "test_acc": 0.8693
+    },
+    {
+      "epoch": 6,
+      "train_loss": 0.34505003000100454,
+      "test_acc": 0.8648
+    },
+    {
+      "epoch": 7,
+      "train_loss": 0.3320862848997116,
+      "test_acc": 0.7824
+    },
+    {
+      "epoch": 8,
+      "train_loss": 0.3214933080991109,
+      "test_acc": 0.8298
+    },
+    {
+      "epoch": 9,
+      "train_loss": 0.3149217581351598,
+      "test_acc": 0.8749
+    },
+    {
+      "epoch": 10,
+      "train_loss": 0.30522795503934225,
+      "test_acc": 0.8848
+    }
+  ],
+  "torch": "2.8.0+cu126",
+  "python": "3.10.12",
+  "result_type": "measured (software)"
+}

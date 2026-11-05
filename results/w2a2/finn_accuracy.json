@@ -1,0 +1,8 @@
+{
+  "result_type": "measured (software)",
+  "stage": "step_streamline",
+  "images": 10000,
+  "finn_accuracy": 0.8848,
+  "brevitas_accuracy_same_images": 0.8848,
+  "top1_agreement_finn_vs_brevitas": 1.0
+}
